@@ -1,4 +1,4 @@
-name: Test PyTorch
+name: mix_order
 
 # see: https://help.github.com/en/actions/reference/events-that-trigger-workflows
 on:
@@ -23,9 +23,9 @@ on:
       - "!requirements/pytorch/docs.txt"
       - "!*.md"
       - "!**/*.md"
-  schedule:
-    # At the end of every day
-    - cron: "0 0 * * *"
+  # schedule:
+  #   # At the end of every day
+  #   - cron: "0 0 * * *"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref }}
@@ -43,46 +43,46 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # only run PyTorch latest
-          - { os: "macOS-14", pkg-name: "lightning", python-version: "3.10", pytorch-version: "2.1" }
-          - { os: "ubuntu-20.04", pkg-name: "lightning", python-version: "3.10", pytorch-version: "2.1" }
-          - { os: "windows-2022", pkg-name: "lightning", python-version: "3.10", pytorch-version: "2.1" }
-          - { os: "macOS-14", pkg-name: "lightning", python-version: "3.11", pytorch-version: "2.2.2" }
-          - { os: "ubuntu-20.04", pkg-name: "lightning", python-version: "3.11", pytorch-version: "2.2.2" }
-          - { os: "windows-2022", pkg-name: "lightning", python-version: "3.11", pytorch-version: "2.2.2" }
-          - { os: "macOS-14", pkg-name: "lightning", python-version: "3.11", pytorch-version: "2.3" }
-          - { os: "ubuntu-20.04", pkg-name: "lightning", python-version: "3.11", pytorch-version: "2.3" }
-          - { os: "windows-2022", pkg-name: "lightning", python-version: "3.11", pytorch-version: "2.3" }
-          - { os: "macOS-14", pkg-name: "lightning", python-version: "3.12.7", pytorch-version: "2.4.1" }
-          - { os: "ubuntu-22.04", pkg-name: "lightning", python-version: "3.12.7", pytorch-version: "2.4.1" }
-          - { os: "windows-2022", pkg-name: "lightning", python-version: "3.12.7", pytorch-version: "2.4.1" }
-          - { os: "macOS-14", pkg-name: "lightning", python-version: "3.12.7", pytorch-version: "2.5.1" }
+          # # only run PyTorch latest
+          # - { os: "macOS-14", pkg-name: "lightning", python-version: "3.10", pytorch-version: "2.1" }
+          # - { os: "ubuntu-20.04", pkg-name: "lightning", python-version: "3.10", pytorch-version: "2.1" }
+          # - { os: "windows-2022", pkg-name: "lightning", python-version: "3.10", pytorch-version: "2.1" }
+          # - { os: "macOS-14", pkg-name: "lightning", python-version: "3.11", pytorch-version: "2.2.2" }
+          # - { os: "ubuntu-20.04", pkg-name: "lightning", python-version: "3.11", pytorch-version: "2.2.2" }
+          # - { os: "windows-2022", pkg-name: "lightning", python-version: "3.11", pytorch-version: "2.2.2" }
+          # - { os: "macOS-14", pkg-name: "lightning", python-version: "3.11", pytorch-version: "2.3" }
+          # - { os: "ubuntu-20.04", pkg-name: "lightning", python-version: "3.11", pytorch-version: "2.3" }
+          # - { os: "windows-2022", pkg-name: "lightning", python-version: "3.11", pytorch-version: "2.3" }
+          # - { os: "macOS-14", pkg-name: "lightning", python-version: "3.12.7", pytorch-version: "2.4.1" }
+          # - { os: "ubuntu-22.04", pkg-name: "lightning", python-version: "3.12.7", pytorch-version: "2.4.1" }
+          # - { os: "windows-2022", pkg-name: "lightning", python-version: "3.12.7", pytorch-version: "2.4.1" }
+          # - { os: "macOS-14", pkg-name: "lightning", python-version: "3.12.7", pytorch-version: "2.5.1" }
           - { os: "ubuntu-22.04", pkg-name: "lightning", python-version: "3.12.7", pytorch-version: "2.5.1" }
-          - { os: "windows-2022", pkg-name: "lightning", python-version: "3.12.7", pytorch-version: "2.5.1" }
-          # only run PyTorch latest with Python latest, use PyTorch scope to limit dependency issues
-          - { os: "macOS-14", pkg-name: "pytorch", python-version: "3.12.7", pytorch-version: "2.5.1" }
-          - { os: "ubuntu-22.04", pkg-name: "pytorch", python-version: "3.12.7", pytorch-version: "2.5.1" }
-          - { os: "windows-2022", pkg-name: "pytorch", python-version: "3.12.7", pytorch-version: "2.5.1" }
-          # "oldest" versions tests, only on minimum Python
-          - { os: "macOS-14", pkg-name: "lightning", python-version: "3.9", pytorch-version: "2.1", requires: "oldest" }
-          - {
-              os: "ubuntu-20.04",
-              pkg-name: "lightning",
-              python-version: "3.9",
-              pytorch-version: "2.1",
-              requires: "oldest",
-            }
-          - {
-              os: "windows-2022",
-              pkg-name: "lightning",
-              python-version: "3.9",
-              pytorch-version: "2.1",
-              requires: "oldest",
-            }
-          # "pytorch" installs the standalone package
-          - { os: "macOS-14", pkg-name: "pytorch", python-version: "3.9", pytorch-version: "2.1" }
-          - { os: "ubuntu-20.04", pkg-name: "pytorch", python-version: "3.9", pytorch-version: "2.1" }
-          - { os: "windows-2022", pkg-name: "pytorch", python-version: "3.9", pytorch-version: "2.1" }
+          # - { os: "windows-2022", pkg-name: "lightning", python-version: "3.12.7", pytorch-version: "2.5.1" }
+          # # only run PyTorch latest with Python latest, use PyTorch scope to limit dependency issues
+          # - { os: "macOS-14", pkg-name: "pytorch", python-version: "3.12.7", pytorch-version: "2.5.1" }
+          # - { os: "ubuntu-22.04", pkg-name: "pytorch", python-version: "3.12.7", pytorch-version: "2.5.1" }
+          # - { os: "windows-2022", pkg-name: "pytorch", python-version: "3.12.7", pytorch-version: "2.5.1" }
+          # # "oldest" versions tests, only on minimum Python
+          # - { os: "macOS-14", pkg-name: "lightning", python-version: "3.9", pytorch-version: "2.1", requires: "oldest" }
+          # - {
+          #     os: "ubuntu-20.04",
+          #     pkg-name: "lightning",
+          #     python-version: "3.9",
+          #     pytorch-version: "2.1",
+          #     requires: "oldest",
+          #   }
+          # - {
+          #     os: "windows-2022",
+          #     pkg-name: "lightning",
+          #     python-version: "3.9",
+          #     pytorch-version: "2.1",
+          #     requires: "oldest",
+          #   }
+          # # "pytorch" installs the standalone package
+          # - { os: "macOS-14", pkg-name: "pytorch", python-version: "3.9", pytorch-version: "2.1" }
+          # - { os: "ubuntu-20.04", pkg-name: "pytorch", python-version: "3.9", pytorch-version: "2.1" }
+          # - { os: "windows-2022", pkg-name: "pytorch", python-version: "3.9", pytorch-version: "2.1" }
     timeout-minutes: 50
     env:
       PACKAGE_NAME: ${{ matrix.pkg-name }}
@@ -148,6 +148,8 @@ jobs:
             -r requirements/_integrations/accelerators.txt \
             --find-links="${TORCH_URL}" --find-links="${PYPI_CACHE_DIR}"
           pip list
+      - name: Install pytest-ranking related
+        run: pip install pytest-ranking pytest-json-report
       - name: Drop LAI from extensions
         if: ${{ matrix.pkg-name != 'lightning' }}
         # Lightning is dependency of Habana or other accelerators/integrations so in case we test PL we need to remove it
@@ -198,14 +200,30 @@ jobs:
         # needs to run outside `pytest`
         run: python utilities/test_warnings.py
 
+      - name: Restore pytest-ranking cache
+        id: restore-pytest-ranking-cache
+        if: always()
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ github.workspace }}/.pytest_cache/v/pytest_ranking_data
+          key: pytest-ranking-cache-${{ github.workflow }}-${{ runner.os }}-${{ matrix.python }}
+      
       - name: Testing PyTorch
         working-directory: tests/tests_pytorch
         # NOTE: do not include coverage report here, see: https://github.com/nedbat/coveragepy/issues/1003
         run: |
           echo $GITHUB_RUN_ID
           python -m coverage run --source ${{ env.COVERAGE_SCOPE }} \
-            -m pytest . -v --timeout=60 --durations=50 --random-order-seed=$GITHUB_RUN_ID
+            -m pytest . -v --timeout=60 --durations=0 --json-report --json-report-file=./test-report.json --rank --rank-weight=1-1-1 --rank-level=method
 
+      - name: Save pytest-ranking cache
+        id: save-pytest-ranking-cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ github.workspace }}/.pytest_cache/v/pytest_ranking_data
+          key: pytest-ranking-cache-${{ github.workflow }}-${{ runner.os }}-${{ matrix.python }}-${{ github.run_id }}
+      
       - name: Statistics
         if: success()
         working-directory: tests/tests_pytorch
